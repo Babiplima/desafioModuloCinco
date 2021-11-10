@@ -3,10 +3,7 @@ package zup.com.br.gerenciadorConta.exceptions;
 import zup.com.br.gerenciadorConta.Enum.Status;
 import zup.com.br.gerenciadorConta.Enum.Tipo;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -15,6 +12,8 @@ import java.time.LocalDateTime;
 public class Conta {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
     @Column(nullable = false)
     private String nome;
     @Column(nullable = false)
@@ -74,5 +73,13 @@ public class Conta {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -12,13 +12,13 @@ import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
 public class ContaController {
 
     @Autowired
-    private ContaService cadastroService;
+    private ContaService contaService;
     @Autowired
     private ModelMapper modelMapper;
 
     public void cadastrarConta(@RequestBody ContaDTO contaDTO){
         Conta conta = modelMapper.map(contaDTO, Conta.class);
-        ContaService.salvarConta(conta);
+        contaService.salvarConta(conta);
     }
 
 }
