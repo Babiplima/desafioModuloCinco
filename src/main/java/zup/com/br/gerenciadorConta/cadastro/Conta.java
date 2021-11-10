@@ -1,2 +1,4 @@
-package zup.com.br.gerenciadorConta.cadastro;public class Conta {
+package zup.com.br.gerenciadorConta.cadastro;
+
+public class Conta {
 }
