@@ -34,13 +34,6 @@ public class ContaDTO {
         this.valor = valor;
     }
 
-    public zup.com.br.gerenciadorConta.cadastro.dto.Tipo getTipo() {
-        return tipo;
-    }
-
-    public void setTipo(zup.com.br.gerenciadorConta.cadastro.dto.Tipo tipo) {
-        this.tipo = tipo;
-    }
 
     public LocalDate getDataDeVencimento() {
         return dataDeVencimento;
@@ -58,11 +51,19 @@ public class ContaDTO {
         this.dataDePagamento = dataDePagamento;
     }
 
-    public zup.com.br.gerenciadorConta.cadastro.dto.Status getStatus() {
+    public Tipo getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(Tipo tipo) {
+        this.tipo = tipo;
+    }
+
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(zup.com.br.gerenciadorConta.cadastro.dto.Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 }
