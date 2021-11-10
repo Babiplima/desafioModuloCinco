@@ -3,13 +3,23 @@ package zup.com.br.gerenciadorConta.exceptions;
 import zup.com.br.gerenciadorConta.Enum.Status;
 import zup.com.br.gerenciadorConta.Enum.Tipo;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "gerenciaConta")
 public class Conta {
 
+    @Id
+    @Column(nullable = false)
     private String nome;
+    @Column(nullable = false)
     private double valor;
+    @Column(nullable = false)
     private Tipo tipo;
     private LocalDate dataDeVencimento;
     private LocalDateTime dataDePagamento;
