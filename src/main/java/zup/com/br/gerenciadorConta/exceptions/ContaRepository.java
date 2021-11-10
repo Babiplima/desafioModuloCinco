@@ -1,4 +1,7 @@
 package zup.com.br.gerenciadorConta.exceptions;
 
-public interface ContaRepository {
+import org.springframework.data.repository.CrudRepository;
+
+public interface ContaRepository extends CrudRepository<Conta, String> {
+    Conta save(Conta conta);
 }
