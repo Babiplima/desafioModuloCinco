@@ -4,12 +4,10 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import zup.com.br.gerenciadorConta.Enum.Tipo;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaSaidaDTO;
-import zup.com.br.gerenciadorConta.cadastro.dto.ResumoDTO;
+import zup.com.br.gerenciadorConta.cadastro.dto.ExibirContaDTO;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,24 +24,20 @@ public class ContaController {
     @ResponseStatus(HttpStatus.CREATED)
     public ContaSaidaDTO cadastrarConta(@RequestBody ContaDTO contaDTO) {
         Conta conta = modelMapper.map(contaDTO, Conta.class);
-        contaService.salvarConta(conta);
 
-        return modelMapper.map(conta, ContaSaidaDTO.class);
+        return modelMapper.map(contaService.salvarConta(conta), ContaSaidaDTO.class);
     }
 
     @GetMapping
-    public List<ResumoDTO> exibirResumoDeContas(@RequestParam(required = false) String nome,
-                                                @RequestParam(required = false) double valor,
-                                                @RequestParam(required = false) Tipo tipo,
-                                                @RequestParam(required = false) LocalDate dataDeVencimento) {
+    public List<ExibirContaDTO> exibirResumoDeContas() {
+        List<ExibirContaDTO> exibirContaDTOS = new ArrayList<>();
 
-        List<ResumoDTO> resumoDTOS = new ArrayList<>();
-        for (Conta conta : contaService.exibirTodasAsContas(nome, valor, tipo, dataDeVencimento)) {
-            ResumoDTO resumoDTO = modelMapper.map(conta, ResumoDTO.class);
-            resumoDTOS.add(resumoDTO);
+        for (Conta conta : contaService.exibirTodasAsContas()) {
+            ExibirContaDTO exibirContaDTO = modelMapper.map(conta, ExibirContaDTO.class);
+            exibirContaDTOS.add(exibirContaDTO);
         }
 
-        return resumoDTOS;
+        return exibirContaDTOS;
 
     }
 }

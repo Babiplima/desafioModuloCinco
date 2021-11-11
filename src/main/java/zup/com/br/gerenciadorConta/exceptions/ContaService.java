@@ -29,20 +29,15 @@ public class ContaService {
     }
 
 
-    public List<Conta> exibirTodasAsContas(String nome, Double valor, Tipo tipo, LocalDate dataDeVencimento) {
-        if (nome != null) {
-            return contaRepository.findAllByNome(nome);
-        } else if (valor != null) {
-            return contaRepository.findAllByValor(valor);
-        } else if (tipo != null) {
-            return contaRepository.findAllByTipo(tipo);
-        } else if (dataDeVencimento != null) {
-            return contaRepository.findAllByDataDeVencimento(dataDeVencimento);
-        }
+    public List<Conta> exibirTodasAsContas() {
         List<Conta> contas = (List<Conta>) contaRepository.findAll();
         return contas;
     }
+
 }
+
+
+
 
 
 
