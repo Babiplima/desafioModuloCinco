@@ -5,11 +5,9 @@ import zup.com.br.gerenciadorConta.Enum.Tipo;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 public interface ContaRepository extends CrudRepository<Conta, Integer> {
 
-    List<Conta> findAllByNome(String nome);
-    List<Conta> findAllByValor(double valor);
-    List<Conta> findAllByTipo(Tipo tipo);
-    List<Conta> findAllByDataDeVencimento(LocalDate dataDeVencimento);
+    Optional<Conta> findById(int id);
 }
