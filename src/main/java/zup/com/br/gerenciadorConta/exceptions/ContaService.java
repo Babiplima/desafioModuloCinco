@@ -1,7 +1,11 @@
 package zup.com.br.gerenciadorConta.exceptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import zup.com.br.gerenciadorConta.Enum.Status;
 import zup.com.br.gerenciadorConta.Enum.Tipo;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
@@ -35,40 +39,20 @@ public class ContaService {
         return contas;
     }
 
-    public Conta buscarPorId(int id){
+    public Conta buscarPorId(int id) {
         Optional<Conta> contaId = contaRepository.findById(id);
 
         return contaId.get();
     }
 
-}
+    public Conta atualizarConta(int id){
+        Conta contaAtualizada = buscarPorId(id);
+        contaAtualizada.setStatus(Status.PAGO);
+        contaAtualizada.setDataDePagamento(LocalDateTime.now());
 
-
-
-
-
-
-
-  /*  @PutMapping(value="/{id}")
-    public ResponseEntity update (@PathVariable("id") int id, @RequestBody Conta conta){
-        return contaRepository.findById(id)
-                .map(record -> {
-                    record.setId(conta.getId());
-                    record.setNome(conta.getNome());
-                    record.setValor(conta.getValor());
-                    record.setTipo(conta.getTipo());
-                    record.setDataDeVencimento(conta.getDataDeVencimento());
-                    record.setTipo(conta.getTipo());
-                    record.setStatus(conta.getStatus());
-                    return ResponseEntity.ok().body(update);
-                }).orElse(ResponseEntity.notFound().build());
+        return contaAtualizada;
     }
-}*/
-/*
-    public ContaSaidaDTO(ContaDTO contaDTO) {
-        adicionarContaNaLista(contaDTO);
-        return calcularInvestimento(investidorDTO);
-    }
+
 }
-}
-*/
+
+

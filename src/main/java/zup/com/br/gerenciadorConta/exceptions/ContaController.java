@@ -3,7 +3,10 @@ package zup.com.br.gerenciadorConta.exceptions;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import zup.com.br.gerenciadorConta.Enum.Status;
+import zup.com.br.gerenciadorConta.cadastro.dto.AtualizarContaDTO;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaSaidaDTO;
 import zup.com.br.gerenciadorConta.cadastro.dto.ExibirContaDTO;
@@ -40,4 +43,21 @@ public class ContaController {
         return exibirContaDTOS;
 
     }
+
+    @PutMapping("/{id}")
+    public ContaSaidaDTO atualizarConta(@PathVariable int id, @RequestBody AtualizarContaDTO atualizarConta) {
+        Conta contaAtualizada = contaService.atualizarConta(id);
+
+        if (atualizarConta.getStatus() == Status.PAGO) {
+
+        }
+        return modelMapper.map(contaAtualizada, ContaSaidaDTO.class);
+    }
 }
+
+
+
+
+
+
+

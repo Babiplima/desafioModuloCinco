@@ -12,7 +12,7 @@ import zup.com.br.gerenciadorConta.Enum.Status;
 public class ExibirContaDTO {
 
     private int id;
-    private String name;
+    private String nome;
     private double valor;
     private Status status;
 }
