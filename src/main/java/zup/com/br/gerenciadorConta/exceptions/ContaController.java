@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import zup.com.br.gerenciadorConta.Enum.Tipo;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
+import zup.com.br.gerenciadorConta.cadastro.dto.ContaSaidaDTO;
 import zup.com.br.gerenciadorConta.cadastro.dto.ResumoDTO;
 
 import java.time.LocalDate;
@@ -23,9 +24,11 @@ public class ContaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void cadastrarConta(@RequestBody ContaDTO contaDTO) {
+    public ContaSaidaDTO cadastrarConta(@RequestBody ContaDTO contaDTO) {
         Conta conta = modelMapper.map(contaDTO, Conta.class);
         contaService.salvarConta(conta);
+
+        return modelMapper.map(conta, ContaSaidaDTO.class);
     }
 
     @GetMapping
