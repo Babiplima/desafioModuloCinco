@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ContaService {
@@ -32,6 +33,12 @@ public class ContaService {
     public List<Conta> exibirTodasAsContas() {
         List<Conta> contas = (List<Conta>) contaRepository.findAll();
         return contas;
+    }
+
+    public Conta buscarPorId(int id){
+        Optional<Conta> contaId = contaRepository.findById(id);
+
+        return contaId.get();
     }
 
 }
