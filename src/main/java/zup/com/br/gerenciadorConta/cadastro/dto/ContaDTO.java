@@ -12,8 +12,7 @@ public class ContaDTO {
     private double valor;
     private Tipo tipo;
     private LocalDate dataDeVencimento;
-    private LocalDateTime dataDePagamento;
-    private Status status;
+
 
     public ContaDTO() {
     }
@@ -43,13 +42,7 @@ public class ContaDTO {
         this.dataDeVencimento = dataDeVencimento;
     }
 
-    public LocalDateTime getDataDePagamento() {
-        return dataDePagamento;
-    }
 
-    public void setDataDePagamento(LocalDateTime dataDePagamento) {
-        this.dataDePagamento = dataDePagamento;
-    }
 
     public Tipo getTipo() {
         return tipo;
@@ -59,11 +52,5 @@ public class ContaDTO {
         this.tipo = tipo;
     }
 
-    public Status getStatus() {
-        return status;
-    }
 
-    public void setStatus(Status status) {
-        this.status = status;
     }
-}
