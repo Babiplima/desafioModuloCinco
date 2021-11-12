@@ -21,6 +21,7 @@ public class Conta {
     @Column(nullable = false)
     private Tipo tipo;
     private LocalDate dataDeVencimento;
+    //Formatar Data com Date Format
     private LocalDateTime dataDePagamento;
     private Status status;
 
