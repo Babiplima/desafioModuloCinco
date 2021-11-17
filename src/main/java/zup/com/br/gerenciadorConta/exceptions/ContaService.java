@@ -1,14 +1,13 @@
 package zup.com.br.gerenciadorConta.exceptions;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import zup.com.br.gerenciadorConta.Enum.Status;
-import zup.com.br.gerenciadorConta.Enum.Tipo;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
+import zup.com.br.gerenciadorConta.exceptions.ExceptionIdNaoEncontrado;
+import zup.com.br.gerenciadorConta.exceptions.Conta;
+import zup.com.br.gerenciadorConta.exceptions.ContaRepository;
+
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,20 +46,25 @@ public class ContaService {
         return contaId.get();
     }
 
-    public Conta atualizarConta(int id) throws ExceptionIdNaoEncontrado {
-        Optional<AtualizarContas> atualizarContas = contaRepository.findById(id);
+
+    public Conta atualizarContaId(int id) throws ExceptionIdNaoEncontrado {
+        Optional<Conta> atualizarContas = contaRepository.findById(id);
         if (atualizarContas.isEmpty()) {
             throw new ExceptionIdNaoEncontrado("Id inválido, não foi encontrado");
-        } else {
+
+        }
+        return atualizarContas.get();
+    }
+
+    public Conta atualizarConta(int id)  {
             Conta contaAtualizada = buscarPorId(id);
             contaAtualizada.setStatus(Status.PAGO);
             contaAtualizada.setDataDePagamento(LocalDateTime.now());
-            return contaAtualizada;
-
+            contaRepository.save(Conta);
+            return Conta;
         }
 
     }
-}
 
 
 
