@@ -47,12 +47,10 @@ public class ContaController {
 
     @PutMapping("/{id}")
     public ContaSaidaDTO atualizarConta(@PathVariable int id, @RequestBody AtualizarContaDTO atualizarConta) {
-        Conta contaAtualizada = contaService.atualizarConta(id);
-
         if (atualizarConta.getStatus() == Status.PAGO) {
-
+            return modelMapper.map(contaService.atualizarConta(id), ContaSaidaDTO.class);
         }
-        return modelMapper.map(contaAtualizada, ContaSaidaDTO.class);
+        throw new StatusInvalidoException("Inválido");
     }
 }
 
