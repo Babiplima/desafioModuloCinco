@@ -47,14 +47,19 @@ public class ContaService {
         return contaId.get();
     }
 
-    public Conta atualizarConta(int id) {
-        Conta contaAtualizada = buscarPorId(id);
-        contaAtualizada.setStatus(Status.PAGO);
-        contaAtualizada.setDataDePagamento(LocalDateTime.now());
+    public Conta atualizarConta(int id) throws ExceptionIdNaoEncontrado {
+        Optional<AtualizarContas> atualizarContas = contaRepository.findById(id);
+        if (atualizarContas.isEmpty()) {
+            throw new ExceptionIdNaoEncontrado("Id inválido, não foi encontrado");
+        } else {
+            Conta contaAtualizada = buscarPorId(id);
+            contaAtualizada.setStatus(Status.PAGO);
+            contaAtualizada.setDataDePagamento(LocalDateTime.now());
+            return contaAtualizada;
 
-        return contaAtualizada;
+        }
+
     }
-
 }
 
 
