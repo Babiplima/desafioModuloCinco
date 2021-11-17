@@ -19,7 +19,6 @@ public class CotrollerAdvisor {
         List<MensagemErro> mensagens = new ArrayList<>();
 
         for (FieldError fieldError : exception.getFieldErrors()) {
-           ErroDaValidacao erroDeValidacao = new ErroDeValidacao(fieldError.getField());
             mensagens.add(new MensagemErro(fieldError.getDefaultMessage(), fieldError.getField()));
         }
         return mensagens;
@@ -27,7 +26,20 @@ public class CotrollerAdvisor {
 
     @ExceptionHandler(ContaJaCadastradaException.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public MensagemErro manipularExcecaoDeLeadEProdutoJaCadastrado(ContaJaCadastradoException exception) {
-        return new MensagemErro(exception.getMessage(), "sem campo");
+    public MensagemDeErro manipularExcecaoDeContaJaCadastrada(ContaJaCadastradaException exception){
+        return new MensagemDeErro(exception.getMessage(), "sem campo");
+    }
+
+    @ExceptionHandler(ContaNaoEncontradaException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public MensagemDeErro manipularExcecaoDeContaJaCadastrada(LeadNaoEncontradoException exception){
+        return new MensagemDeErro(exception.getMessage(), "sem campo");
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public MensagemDeErro mensagemGenerica(RuntimeException exception){
+        System.out.println(exception);
+        return new MensagemDeErro("Algo deu errado. Volte mais tarde");
     }
 }
