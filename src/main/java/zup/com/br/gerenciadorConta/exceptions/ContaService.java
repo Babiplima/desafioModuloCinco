@@ -25,43 +25,37 @@ public class ContaService {
     private ContaRepository contaRepository;
 
     public Conta salvarConta(Conta conta) {
-        try {
-            if (conta.getDataDeVencimento().isBefore(LocalDate.now())) {
-                conta.setStatus(Status.VENCIDA);
-            } else {
-                conta.setStatus(Status.AGUARDANDO);
-            }
+        if (conta.getDataDeVencimento().isBefore(LocalDate.now())) {
+            conta.setStatus(Status.VENCIDA);
+        } else {
+            conta.setStatus(Status.AGUARDANDO);
         }
+
         return contaRepository.save(conta);
     }
-        }catch(RuntimeException exception){
-        throw new ResponseStatusException(HttpStatus.UNPROCESSABLE_ENTITY, exception.getMessage());
-
-        }
-        }
 
 
-public List<Conta> exibirTodasAsContas(){
-        List<Conta> contas=(List<Conta>)contaRepository.findAll();
+    public List<Conta> exibirTodasAsContas() {
+        List<Conta> contas = (List<Conta>) contaRepository.findAll();
         return contas;
-        }
+    }
 
 
-public Conta buscarPorId(int id){
-        Optional<Conta> contaId=contaRepository.findById(id);
+    public Conta buscarPorId(int id) {
+        Optional<Conta> contaId = contaRepository.findById(id);
 
         return contaId.get();
-        }
+    }
 
-public Conta atualizarConta(int id){
-        Conta contaAtualizada=buscarPorId(id);
+    public Conta atualizarConta(int id) {
+        Conta contaAtualizada = buscarPorId(id);
         contaAtualizada.setStatus(Status.PAGO);
         contaAtualizada.setDataDePagamento(LocalDateTime.now());
 
         return contaAtualizada;
-        }
+    }
 
-        }
+}
 
 
 
