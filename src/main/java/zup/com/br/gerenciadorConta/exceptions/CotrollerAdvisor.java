@@ -24,22 +24,27 @@ public class CotrollerAdvisor {
         return mensagens;
     }
 
-    @ExceptionHandler(ContaJaCadastradaException.class)
+    @ExceptionHandler(ContaJaCadastrada.class)
     @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
-    public MensagemDeErro manipularExcecaoDeContaJaCadastrada(ContaJaCadastradaException exception){
-        return new MensagemDeErro(exception.getMessage(), "sem campo");
+    public MensagemErro manipularExcecaoDeContaJaCadastrada(ContaJaCadastrada exception) {
+        return new MensagemErro(exception.getMessage());
     }
 
-    @ExceptionHandler(ContaNaoEncontradaException.class)
+    @ExceptionHandler(ContaNaoEncontrada.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public MensagemDeErro manipularExcecaoDeContaJaCadastrada(LeadNaoEncontradoException exception){
-        return new MensagemDeErro(exception.getMessage(), "sem campo");
+    public MensagemErro manipularContaNaoEncontrada(ContaNaoEncontrada exception) {
+        return new MensagemErro(exception.getMessage());
     }
 
     @ExceptionHandler(RuntimeException.class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public MensagemDeErro mensagemGenerica(RuntimeException exception){
-        System.out.println(exception);
-        return new MensagemDeErro("Algo deu errado. Volte mais tarde");
+    @ResponseStatus(HttpStatus.UNPROCESSABLE_ENTITY)
+    public MensagemErro statusInvalidoException(StatusInvalidoException exception) {
+        return new MensagemErro(exception.getMessage());
+    }
+
+    @ExceptionHandler(ExceptionIdNaoEncontrado.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public MensagemErro exceptionIdNaoEncontrado(ExceptionIdNaoEncontrado exception) {
+        return new MensagemErro(exception.getMessage());
     }
 }

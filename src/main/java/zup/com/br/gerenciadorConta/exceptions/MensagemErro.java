@@ -9,11 +9,23 @@ public class MensagemErro {
         this.campo = campo;
     }
 
+    public MensagemErro(String mensagem) {
+        this.mensagem = mensagem;
+    }
+
     public String getMensagem() {
         return mensagem;
     }
 
     public void setMensagem(String mensagem) {
         this.mensagem = mensagem;
+    }
+
+    public String getCampo() {
+        return campo;
+    }
+
+    public void setCampo(String campo) {
+        this.campo = campo;
     }
 }

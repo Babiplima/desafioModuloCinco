@@ -57,12 +57,17 @@ public class ContaService {
     }
 
     public Conta atualizarConta(int id)  {
+        Optional<Conta> atualizarContas = contaRepository.findById(id);
+        if (atualizarContas.isEmpty()) {
+            throw new ExceptionIdNaoEncontrado("Id inválido, não foi encontrado");
+        }
             Conta contaAtualizada = buscarPorId(id);
             contaAtualizada.setStatus(Status.PAGO);
             contaAtualizada.setDataDePagamento(LocalDateTime.now());
-            contaRepository.save(Conta);
-            return Conta;
+            contaRepository.save(contaAtualizada);
+            return contaAtualizada;
         }
+
 
     }
 

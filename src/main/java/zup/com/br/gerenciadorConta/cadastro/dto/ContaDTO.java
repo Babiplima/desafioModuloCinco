@@ -15,16 +15,15 @@ import java.time.LocalDateTime;
 
 public class ContaDTO {
 
-
-    @Min (value =2, message = "Nome com menos de dois caracteres não é permitido")
+    @Size (max = 50, min = 2,message = "Tamanho de nome inválido")
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
-    @Length(min = 2, message = "Este campo não pode ser preenchido por menos que dois caracteres")
-    @Length(max =50,message = "O número de caracteres excedem o limite permitido")
+    @Min(value = 2, message = "No mínimo deve conter pelo menos 2 caracteres")
+    @Max(value = 50,message = "A quantidade de caracteres excede a que é permitida")
     private double valor;
-    @NotBlank(message = "O campo tipo é obrigatório")
+    @NotNull
     private Tipo tipo;
-
+    @NotNull
     private LocalDate dataDeVencimento;
 
 
