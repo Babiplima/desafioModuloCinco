@@ -75,7 +75,18 @@ public class ContaController {
             contaSaidaDTO.add(contaSaidaDTO1);
         }
         return contaSaidaDTO;
+    }
 
+
+    @GetMapping("/valor")
+    @ResponseBody
+    public List<ContaSaidaDTO> buscarFiltroValorAproximado(@RequestParam double valor) {
+        List<ContaSaidaDTO> contaSaidaDTO = new ArrayList<>();
+        for (Conta conta : contaService.buscarFiltroValorAproximado(valor)) {
+            ContaSaidaDTO contaSaidaDTO1 = modelMapper.map(conta, ContaSaidaDTO.class);
+            contaSaidaDTO.add(contaSaidaDTO1);
+        }
+        return contaSaidaDTO;
     }
 }
 

@@ -79,6 +79,11 @@ public class ContaService {
         return contasCFiltros1;
     }
 
+    public List<Conta> buscarFiltroValorAproximado(double valor) {
+        List<Conta> contasCFiltros2 = contaRepository.findAllByValorAproximado(valor);
+        return contasCFiltros2;
+    }
+
 }
 
 
