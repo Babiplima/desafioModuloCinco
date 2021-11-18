@@ -68,6 +68,10 @@ public class ContaService {
             return contaAtualizada;
         }
 
+        public List<Conta> buscarFiltroStatus(Status status){
+        List<Conta>contasCFiltros = contaRepository.findAllByStatus(status);
+        return contasCFiltros;
+        }
 
     }
 

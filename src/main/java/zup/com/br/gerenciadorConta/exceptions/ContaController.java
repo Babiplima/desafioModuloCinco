@@ -53,6 +53,18 @@ public class ContaController {
         }
         throw new StatusInvalidoException("Inválido");
     }
+
+    @GetMapping("/status")
+    @ResponseBody
+    public List<ContaSaidaDTO> buscarFiltroStatus(@RequestParam Status status) {
+        List<ContaSaidaDTO> contaSaidaDTO = new ArrayList<>();
+        for (Conta conta : contaService.buscarFiltroStatus(status)) {
+            ContaSaidaDTO contaSaidaDTO1 = modelMapper.map(conta, ContaSaidaDTO.class);
+            contaSaidaDTO.add(contaSaidaDTO1);
+        }
+        return contaSaidaDTO;
+    }
+
 }
 
 
