@@ -6,6 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import zup.com.br.gerenciadorConta.Enum.Status;
+import zup.com.br.gerenciadorConta.Enum.Tipo;
 import zup.com.br.gerenciadorConta.cadastro.dto.AtualizarContaDTO;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaSaidaDTO;
@@ -65,6 +66,17 @@ public class ContaController {
         return contaSaidaDTO;
     }
 
+    @GetMapping("/tipo")
+    @ResponseBody
+    public List<ContaSaidaDTO> buscarFiltroTipo(@RequestParam Tipo tipo) {
+        List<ContaSaidaDTO> contaSaidaDTO = new ArrayList<>();
+        for (Conta conta : contaService.buscarFiltroTipo(tipo)) {
+            ContaSaidaDTO contaSaidaDTO1 = modelMapper.map(conta, ContaSaidaDTO.class);
+            contaSaidaDTO.add(contaSaidaDTO1);
+        }
+        return contaSaidaDTO;
+
+    }
 }
 
 
