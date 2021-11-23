@@ -55,7 +55,6 @@ public class ContaController {
         throw new StatusInvalidoException("Inválido");
     }
 
-
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletarConta(@PathVariable int id){

@@ -69,11 +69,12 @@ public class ContaService {
         return contaAtualizada;
     }
 
-    public void excluirConta(int id){
-        if (contaRepository.existsById(id)){
+    public void excluirConta(int id) {
+        if (contaRepository.existsById(id)) {
             contaRepository.deleteById(id);
+        } else {
+            throw new ExceptionIdNaoEncontrado("Conta não encontrada");
         }
-        throw new ExceptionIdNaoEncontrado("Conta não encontrada");
     }
 
     public List<Conta> buscarFiltroStatus(Status status) {

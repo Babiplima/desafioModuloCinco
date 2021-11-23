@@ -17,6 +17,6 @@ public interface ContaRepository extends CrudRepository<Conta, Integer> {
 
     List<Conta>findAllByTipo(Tipo tipo);
 
-    @Query(value = "SELECT * FROM contas WHERE VALOR BETWEEN: valor*0.5 AND : valor*1.5", nativeQuery = true)
+    @Query(value = "SELECT * FROM gerencia_conta WHERE VALOR BETWEEN :valor*0.5 AND :valor*1.5", nativeQuery = true)
     List<Conta>findAllByValorAproximado(double valor);
 }
