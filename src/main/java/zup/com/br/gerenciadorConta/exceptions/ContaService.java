@@ -3,6 +3,7 @@ package zup.com.br.gerenciadorConta.exceptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import zup.com.br.gerenciadorConta.Enum.Status;
+import zup.com.br.gerenciadorConta.Enum.Tipo;
 import zup.com.br.gerenciadorConta.cadastro.dto.ContaDTO;
 import zup.com.br.gerenciadorConta.exceptions.ExceptionIdNaoEncontrado;
 import zup.com.br.gerenciadorConta.exceptions.Conta;
@@ -56,20 +57,41 @@ public class ContaService {
         return atualizarContas.get();
     }
 
-    public Conta atualizarConta(int id)  {
+    public Conta atualizarConta(int id) {
         Optional<Conta> atualizarContas = contaRepository.findById(id);
         if (atualizarContas.isEmpty()) {
             throw new ExceptionIdNaoEncontrado("Id inválido, não foi encontrado");
         }
-            Conta contaAtualizada = buscarPorId(id);
-            contaAtualizada.setStatus(Status.PAGO);
-            contaAtualizada.setDataDePagamento(LocalDateTime.now());
-            contaRepository.save(contaAtualizada);
-            return contaAtualizada;
-        }
-
-
+        Conta contaAtualizada = buscarPorId(id);
+        contaAtualizada.setStatus(Status.PAGO);
+        contaAtualizada.setDataDePagamento(LocalDateTime.now());
+        contaRepository.save(contaAtualizada);
+        return contaAtualizada;
     }
+
+    public void excluirConta(int id){
+        if (contaRepository.existsById(id)){
+            contaRepository.deleteById(id);
+        }
+        throw new ExceptionIdNaoEncontrado("Conta não encontrada");
+    }
+
+    public List<Conta> buscarFiltroStatus(Status status) {
+        List<Conta> contasCFiltros = contaRepository.findAllByStatus(status);
+        return contasCFiltros;
+    }
+
+    public List<Conta> buscarFiltroTipo(Tipo tipo) {
+        List<Conta> contasCFiltros1 = contaRepository.findAllByTipo(tipo);
+        return contasCFiltros1;
+    }
+
+    public List<Conta> buscarFiltroValorAproximado(double valor) {
+        List<Conta> contasCFiltros2 = contaRepository.findAllByValorAproximado(valor);
+        return contasCFiltros2;
+    }
+
+}
 
 
 
